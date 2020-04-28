@@ -1,0 +1,2 @@
+export const NEW_ORDER_FETCHED = 'NEW_ORDER_FETCHED';
+export const SELECT_ORDER = 'SELECT_ORDER';
