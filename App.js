@@ -8,15 +8,17 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from './src/screens/HomeScreen';
-import {View, TouchableOpacity} from 'react-native';
+import MenuItemsScreen from './src/screens/MenuItemsScreen';
+import {StyleSheet} from 'react-native';
 import configureStore from './src/store/configureStore';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {all} from 'redux-saga/effects';
-import {Root} from 'native-base';
 import screenHome from './src/store/home';
+import screenMenuItems from './src/store/menuItems';
+import SplashScreen from 'react-native-splash-screen';
 
 const HomeStack = createStackNavigator();
 
@@ -28,33 +30,42 @@ function HomeStackScreen() {
   );
 }
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const {store, persistor, sagaMiddleware} = configureStore();
 
 function* rootSaga() {
-  yield all([screenHome.sagas()]);
+  yield all([screenHome.sagas(), screenMenuItems.sagas()]);
 }
-
 sagaMiddleware.run(rootSaga);
-
 const App = () => {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <Provider store={store}>
-      <Root>
-        <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer>
-            <Tab.Navigator>
-              <Tab.Screen name="Home" component={HomeStackScreen} />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </PersistGate>
-      </Root>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Drawer.Navigator
+            initialRouteName="Home"
+            drawerStyle={styles.drawer}
+            drawerContentOptions={{
+              activeTintColor: '#e7ecef',
+              inactiveTintColor: '#e7ecef',
+            }}>
+            <Drawer.Screen name="Home" component={HomeStackScreen} />
+            <Drawer.Screen name="Menu Items" component={MenuItemsScreen} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  drawer: {
+    backgroundColor: '#1c1c1c',
+  },
+});
 
 export default App;

@@ -20,6 +20,9 @@ const CartItem = props => {
             {props.item.form.main && (
               <Text style={styles.subOption}>{props.item.form.main}</Text>
             )}
+            {props.item.form.bowlInput && (
+              <Text style={styles.subOption}>{props.item.form.bowlInput}</Text>
+            )}
             {props.item.form.side && (
               <Text style={styles.subOption}>{props.item.form.side}</Text>
             )}
@@ -72,6 +75,9 @@ const CartItem = props => {
             {props.item.form.main && (
               <Text style={styles.subOption}>{props.item.form.main}</Text>
             )}
+            {props.item.form.bowlInput && (
+              <Text style={styles.subOption}>{props.item.form.bowlInput}</Text>
+            )}
             {props.item.form.side && (
               <Text style={styles.subOption}>{props.item.form.side}</Text>
             )}
@@ -109,12 +115,13 @@ const styles = StyleSheet.create({
     paddingTop: 13,
     paddingBottom: 13,
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0FF',
+    borderBottomColor: '#e9e9e9',
+    borderStyle: 'solid',
   },
   quantity: {
     flex: 1,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 19,
     color: '#424242',
   },
   titleOptionsContainer: {flex: 8, flexDirection: 'column'},
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 10,
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: 'bold',
   },
   subOption: {
@@ -130,11 +137,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 10,
     paddingTop: 5,
-    fontSize: 16,
+    fontSize: 15,
     color: 'black',
   },
   price: {
-    fontSize: 19,
+    fontSize: 18,
     textAlign: 'center',
     color: '#424242',
   },

@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Image} from 'react-native';
-import {Button, Icon} from 'native-base';
+import {Text, StyleSheet, SafeAreaView, Image} from 'react-native';
 // import Icon from "react-native-vector-icons/AntDesign";
 
 const Orders404 = props => {
