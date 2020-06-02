@@ -45,7 +45,10 @@ function* startListener() {
     } else {
       const order = dataObj.data;
       order.id = dataObj.id;
-      order.alert = true;
+      console.log(order);
+      if (order.status === 'incomplete') {
+        order.alert = true;
+      }
       yield put({type: actionTypes.NEW_ORDER_FETCHED, order: order});
     }
   }
